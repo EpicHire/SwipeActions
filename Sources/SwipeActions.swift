@@ -479,8 +479,10 @@ public struct SwipeView<Label, LeadingActions, TrailingActions>: View where Labe
                 leadingState == nil && newValue == .triggering
 
             if changed, options.enableTriggerHaptics { /// Generate haptic feedback if necessary.
+                #if !os(visionOS)
                 let generator = UIImpactFeedbackGenerator(style: .rigid)
                 generator.impactOccurred()
+                #endif
             }
         }
         .onChange(of: trailingState) { [trailingState] newValue in
@@ -490,8 +492,10 @@ public struct SwipeView<Label, LeadingActions, TrailingActions>: View where Labe
                 trailingState == nil && newValue == .triggering
 
             if changed, options.enableTriggerHaptics {
+                #if !os(visionOS)
                 let generator = UIImpactFeedbackGenerator(style: .rigid)
                 generator.impactOccurred()
+                #endif
             }
         }
 
